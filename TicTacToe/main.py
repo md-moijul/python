@@ -1,7 +1,5 @@
-from posixpath import normpath
 from tkinter import *
-
-from pkg_resources import normalize_path
+import gameplay
 root = Tk()
 
 root.title('tictactoe')
@@ -12,26 +10,15 @@ root.configure(bg="red")
 frame = LabelFrame(root,borderwidth = 1, bg="orange", padx=5, pady=5)
 frame.grid(row=1, column=0,columnspan=6, padx=5, pady=5)
 
-def human():
-    return 
-
-def easy():
-    return
-
-def normal():
-    return
-
-def hard():
-    return
 
 def mode():
     
     for widgets in frame.winfo_children():
         widgets.destroy()
             
-    easy_button = Button(frame, text="EASY",bg="red",width=50 , command=easy).grid(row =0 , column=0, pady =10)
-    normal_button = Button(frame, text="NORMAL",bg="red",width=50, command=normal).grid(row =1 , column=0, pady=10)
-    easy_button = Button(frame, text="HARD",bg="red",width=50, command=hard).grid(row =2 , column=0 ,pady= 10)
+    easy_button = Button(frame, text="EASY",bg="red",width=50 , command=gameplay.easy).grid(row =0 , column=0, pady =10)
+    normal_button = Button(frame, text="NORMAL",bg="red",width=50, command=gameplay.normal).grid(row =1 , column=0, pady=10)
+    easy_button = Button(frame, text="HARD",bg="red",width=50, command=gameplay.hard).grid(row =2 , column=0 ,pady= 10)
 
 welcome_label =Label(frame, text="welcome to Tic Tac Toe",font=("Times New Roman", 29),bg="red") 
 welcome_label.grid(row=0,column=0,columnspan= 3,pady=(0,20))
@@ -42,7 +29,7 @@ def clear_frame():
        for widgets in frame.winfo_children():
             widgets.destroy()
 
-Human_button = Button(frame, text="Human",bg="orange",width=20 , command= human).grid(row =1 , column=1)
+Human_button = Button(frame, text="Human",bg="orange",width=20 , command= gameplay.human).grid(row =1 , column=1)
 Computer_button = Button(frame, text="Computer",bg="orange",width=20, command= mode).grid(row =1 , column=2)
 
 
