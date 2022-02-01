@@ -5,7 +5,7 @@ import copy
 root = Tk()
 
 root.title('tictactoe')
-root.geometry("387x410")
+root.geometry("500x500")
 root.configure(bg="red")
 
 symble ="X"
@@ -27,14 +27,31 @@ def pressed(value):
             symble = "X"
 
         board()
-
-
-    
+        
     else :
         print(value)
         
     
-
+def win_check():
+    if numbers[0]==numbers[1] and numbers[1]==numbers[2]:
+        return True
+    elif numbers[3]==numbers[4] and numbers[4]==numbers[5]:
+        return True
+    elif numbers[6]==numbers[7] and numbers[7]==numbers[9]:
+        return True
+    elif numbers[0]==numbers[3] and numbers[3]==numbers[6]:
+        return True
+    elif numbers[1]==numbers[4] and numbers[4]==numbers[7]:
+        return True
+    elif numbers[2]==numbers[5] and numbers[5]==numbers[8]:
+        return True
+    elif numbers[0]==numbers[4] and numbers[4]==numbers[8]:
+        return True
+    elif numbers[2]==numbers[4] and numbers[4]==numbers[6]:
+        return True
+    else:
+        return False
+    
 def board():
     for widgets in frame.winfo_children():
         widgets.destroy()
@@ -104,26 +121,61 @@ def board():
         button9 = Button(frame, text=numbers[8],bg="red",pady= 50,padx=50,command= lambda: pressed(numbers[8])).grid(row =4 , column=4,pady= 2,padx=2)
     
     
-    reset_button = Button(frame, text="reset",bg="orange",width=20 , command= welcome).grid(row =10 , column=0, columnspan=5) 
+    '''
+    if symble == "X":
+        player_no= "1"
+    else:
+        player_no= "2" 
+    textstatus =("Player no "+ player_no +" make your move :")
+    winstatus=("Player no "+ player_no +"\nwon the match")
+    
+    if win_check() == False:
+        status_label =Label(frame, text=textstatus,font=("Times New Roman", 15), bg="orange") 
+        status_label.grid(row=9,column=0,columnspan= 5)
+    else :
+        for widgets in frame.winfo_children():
+            widgets.destroy()
+            
+        status_label =Label(frame, text=winstatus,font=("Times New Roman", 50), bg="orange") 
+        status_label.grid(row=9,column=0,columnspan= 5)
+        
+        
+        '''
+    
+    
+    reset_button = Button(frame, text="reset",bg="orange",width=20 , command= welcome).grid(row =10 , column=0, columnspan=6) 
   
 
 def human():
     for widgets in frame.winfo_children():
         widgets.destroy()
+
+    if symble == "X":
+        player_no= "1"
+    else:
+        player_no= "2" 
+    textstatus =("Player no "+ player_no +" make your move :")
+    winstatus=("Player no "+ player_no +"\nwon the match")
+    
+    if win_check() == False:
+        status_label =Label(frame, text=textstatus,font=("Times New Roman", 15), bg="orange") 
+        status_label.grid(row=9,column=0,columnspan= 5)
+    else :
+        for widgets in frame.winfo_children():
+            widgets.destroy()
+            
+        status_label =Label(frame, text=winstatus,font=("Times New Roman", 50), bg="orange") 
+        status_label.grid(row=9,column=0,columnspan= 5)
     
     board()
     
-    
-    
-    reset_button = Button(frame, text="reset",bg="orange",width=20 , command= welcome).grid(row =10 , column=0, columnspan=5)    
 
 def easy():
     for widgets in frame.winfo_children():
         widgets.destroy()
         
     board()
-    reset_button = Button(frame, text="reset",bg="orange",width=20 , command= welcome).grid(row =10 , column=0,columnspan=5)    
-    
+  
     
 def normal():
     for widgets in frame.winfo_children():
@@ -131,7 +183,6 @@ def normal():
     
     board()   
     
-    reset_button = Button(frame, text="reset",bg="orange",width=20 , command= welcome).grid(row =10 , column=0,columnspan=5)    
 
 def hard():
     for widgets in frame.winfo_children():
@@ -139,10 +190,10 @@ def hard():
     
     board()    
     
-    
-    reset_button = Button(frame, text="reset",bg="orange",width=20 , command= welcome).grid(row =10 , column=0,columnspan=5)    
 
 def welcome():
+    global numbers
+    numbers = ["1","2","3","4","5","6","7","8","9"]
     for widgets in frame.winfo_children():
         widgets.destroy()
     def mode():
