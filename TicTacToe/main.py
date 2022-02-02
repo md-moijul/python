@@ -1,6 +1,4 @@
-from symtable import Symbol
 from tkinter import *
-import copy
 import random
 
 
@@ -17,13 +15,17 @@ type = 0
 move_no= 0
 
 
-
-
 frame = LabelFrame(root,borderwidth = 1, bg="orange", padx=5, pady=5)
 frame.grid(row=2, column=0,columnspan=6, padx=5, pady=5)
 
 frame1 = LabelFrame(root,borderwidth = 1, bg="orange", padx=5, pady=5)
 frame1.grid(row=1, column=0,columnspan=6, padx=5, pady=5)
+
+def demoboard():
+    board_demo = (numbers[0]+"    |    " + numbers[1]+"    |    " + numbers[2]+ "\n------------------\n" + numbers[3]+"    |    " + numbers[4]+"    |    "+ numbers[5]+ "\n------------------\n" +numbers[6]+"    |    "+ numbers[7]+"    |    " + numbers[8] )
+    
+    board_label =Label(frame1, text=board_demo,font=("Times New Roman", 20),bg="orange") 
+    board_label.grid(row=1,column=0,columnspan= 5)
         
 def pressed(value):
     global symble , move_no
@@ -68,54 +70,55 @@ def compmove():
                 choice = random.choice([1,3,5,7])
         
         if type == 3:
+            
 
                 if numbers[0]==numbers[1] and numbers[2].isdigit() is True:
-                    choice == numbers[2]
-                elif numbers[2]==numbers[1]and numbers[0].isdigit() is True:
-                    choice == numbers[0]
-                elif numbers[0]==numbers[2]and numbers[1].isdigit() is True:
-                    choice == numbers[1]
-                elif numbers[3]==numbers[4]and numbers[5].isdigit() is True:
-                    choice == numbers[5]
-                elif numbers[4]==numbers[5]and numbers[3].isdigit() is True:
-                    choice == numbers[3]
-                elif numbers[3]==numbers[5]and numbers[4].isdigit() is True:
-                    choice == numbers[4]
-                elif numbers[6]==numbers[7]and numbers[8].isdigit() is True:
-                    choice == numbers[8] 
+                    choice = 2
+                elif numbers[2]==numbers[1] and numbers[0].isdigit() is True:
+                    choice = 0
+                elif numbers[0]==numbers[2] and numbers[1].isdigit() is True:
+                    choice = 1
+                elif numbers[3]==numbers[4] and numbers[5].isdigit() is True:
+                    choice = 5
+                elif numbers[4]==numbers[5] and numbers[3].isdigit() is True:
+                    choice = 3
+                elif numbers[3]==numbers[5] and numbers[4].isdigit() is True:
+                    choice = 4
+                elif numbers[6]==numbers[7] and numbers[8].isdigit() is True:
+                    choice = 8 
                 elif numbers[7]==numbers[8] and numbers[6].isdigit() is True:
-                    choice == numbers[6]
-                elif numbers[6]==numbers[8]and numbers[7].isdigit() is True:
-                    choice == numbers[7]
-                elif numbers[0]==numbers[4]and numbers[8].isdigit() is True:
-                    choice == numbers[8]
-                elif numbers[4]==numbers[8]and numbers[0].isdigit() is True:
-                    choice == numbers[0]
-                elif numbers[2]==numbers[4]and numbers[6].isdigit() is True:
-                    choice == numbers[6]
-                elif numbers[4]==numbers[6]and numbers[2].isdigit() is True:
-                    choice == numbers[2]
-                elif numbers[6]==numbers[2]and numbers[4].isdigit() is True:
-                    choice == numbers[4]    
+                    choice = 6
+                elif numbers[6]==numbers[8] and numbers[7].isdigit() is True:
+                    choice = 7
+                elif numbers[0]==numbers[4] and numbers[8].isdigit() is True:
+                    choice = 8
+                elif numbers[4]==numbers[8] and numbers[0].isdigit() is True:
+                    choice = 0
+                elif numbers[2]==numbers[4] and numbers[6].isdigit() is True:
+                    choice = 6
+                elif numbers[4]==numbers[6] and numbers[2].isdigit() is True:
+                    choice = 2
+                elif numbers[6]==numbers[2] and numbers[4].isdigit() is True:
+                    choice = 4    
                 elif numbers[0]==numbers[1] and numbers[6].isdigit() is True:
-                    choice == numbers[6]
-                elif numbers[3]==numbers[6]and numbers[0].isdigit() is True:
-                    choice == numbers[0]
-                elif numbers[0]==numbers[6]and numbers[3].isdigit() is True:
-                    choice == numbers[3]
-                elif numbers[1]==numbers[4]and numbers[7].isdigit() is True:
-                    choice == numbers[7]
-                elif numbers[4]==numbers[7]and numbers[1].isdigit() is True:
-                    choice == numbers[1]
-                elif numbers[1]==numbers[7]and numbers[4].isdigit() is True:
-                    choice == numbers[4]
-                elif numbers[2]==numbers[5]and numbers[8].isdigit() is True:
-                    choice == numbers[8] 
+                    choice = 6
+                elif numbers[3]==numbers[6] and numbers[0].isdigit() is True:
+                    choice = 0
+                elif numbers[0]==numbers[6] and numbers[3].isdigit() is True:
+                    choice = 3
+                elif numbers[1]==numbers[4] and numbers[7].isdigit() is True:
+                    choice = 7
+                elif numbers[4]==numbers[7] and numbers[1].isdigit() is True:
+                    choice = 1
+                elif numbers[1]==numbers[7] and numbers[4].isdigit() is True:
+                    choice = 4
+                elif numbers[2]==numbers[5] and numbers[8].isdigit() is True:
+                    choice = 8 
                 elif numbers[5]==numbers[8] and numbers[2].isdigit() is True:
-                    choice == numbers[2]
-                elif numbers[2]==numbers[8]and numbers[5].isdigit() is True:
-                    choice == numbers[5]
-        
+                    choice = 2
+                elif numbers[2]==numbers[8] and numbers[5].isdigit() is True:
+                    choice = 5
+     
     
         numbers[choice] = symble
         symble = "X"
@@ -181,14 +184,25 @@ def status():
         winstatus=("Player no "+ winner_no +"\nwon the match")
         
         if win_check() == False:
-            status_label =Label(frame1, text=textstatus,font=("Times New Roman", 15), bg="orange") 
-            status_label.grid(row=9,column=0,columnspan= 5)
+            if move_no < 9 :
+                status_label =Label(frame1, text=textstatus,font=("Times New Roman", 15), bg="orange") 
+                status_label.grid(row=0,column=0,columnspan= 5)
+            else:
+                for widgets in frame.winfo_children():
+                    widgets.destroy()
+                
+                status_label =Label(frame1, text="the match has been drawn",font=("Times New Roman", 20), bg="orange") 
+                status_label.grid(row=0,column=0,columnspan= 5)
+                demoboard()
+            
+        
         else :
             for widgets in frame.winfo_children():
                 widgets.destroy()
                 
             status_label =Label(frame1, text=winstatus,font=("Times New Roman", 50), bg="orange") 
-            status_label.grid(row=9,column=0,columnspan= 5)
+            status_label.grid(row=0,column=0,columnspan= 5)
+            demoboard()
     else:
         if symble == "X":
             winner_no= "computer"
@@ -202,16 +216,21 @@ def status():
         if win_check() == False:
             if move_no < 9:
                 status_label =Label(frame1, text=compstatus,font=("Times New Roman", 20), bg="orange") 
-                status_label.grid(row=9,column=0,columnspan= 5)
+                status_label.grid(row=0,column=0,columnspan= 5)
             else:
-                status_label =Label(frame1, text="match has been drawn",font=("Times New Roman", 20), bg="orange") 
-                status_label.grid(row=9,column=0,columnspan= 5)
+                for widgets in frame.winfo_children():
+                    widgets.destroy()
+                
+                status_label =Label(frame1, text=drawstatus,font=("Times New Roman", 20), bg="orange") 
+                status_label.grid(row=0,column=0,columnspan= 5)
+                demoboard()
         else:
             for widgets in frame.winfo_children():
                 widgets.destroy()
              
             status_label =Label(frame1, text=winstatus,font=("Times New Roman", 30), bg="orange") 
-            status_label.grid(row=9,column=0,columnspan= 5)    
+            status_label.grid(row=9,column=0,columnspan= 5)
+            demoboard()  
 def board():
     for widgets in frame.winfo_children():
         widgets.destroy()
@@ -338,6 +357,8 @@ def welcome():
 
     welcome_label =Label(frame1, text="welcome to Tic Tac Toe",font=("Times New Roman", 29),bg="red") 
     welcome_label.grid(row=0,column=0,columnspan= 3,pady=(0,20))
+    
+    demoboard()
 
     play_as_label = Label(frame , text="play VS :",bg="orange",padx=1).grid(row =1 , column=0)
 
