@@ -4,9 +4,10 @@ import random
 
 root = Tk()
 
-root.title('tictactoe')
-root.geometry("500x500")
+root.title('Jk tech')
+root.geometry("410x500")
 root.configure(bg="red")
+
 
 
 numbers = ["1","2","3","4","5","6","7","8","9"]
@@ -166,6 +167,7 @@ def win_check():
         return False
     
 def status():
+    status_list= ["Player no "," make your move :","\nwon the match","the match has been drawn","it's your move :"," won the match!"]
     for widgets in frame1.winfo_children():
             widgets.destroy()
     
@@ -180,18 +182,18 @@ def status():
         else:
             winner_no= "1" 
         
-        textstatus =("Player no "+ player_no +" make your move :")
-        winstatus=("Player no "+ winner_no +"\nwon the match")
+        textstatus =(status_list[0]+ player_no +status_list[1])
+        winstatus=(status_list[0]+ winner_no + status_list[2])
         
         if win_check() == False:
             if move_no < 9 :
-                status_label =Label(frame1, text=textstatus,font=("Times New Roman", 15), bg="orange") 
+                status_label =Label(frame1, text=(status_list[0]+ player_no +status_list[1]),font=("Times New Roman", 22), bg="orange") 
                 status_label.grid(row=0,column=0,columnspan= 5)
             else:
                 for widgets in frame.winfo_children():
                     widgets.destroy()
                 
-                status_label =Label(frame1, text="the match has been drawn",font=("Times New Roman", 20), bg="orange") 
+                status_label =Label(frame1, text=status_list[3],font=("Times New Roman", 27), bg="orange") 
                 status_label.grid(row=0,column=0,columnspan= 5)
                 demoboard()
             
@@ -200,36 +202,36 @@ def status():
             for widgets in frame.winfo_children():
                 widgets.destroy()
                 
-            status_label =Label(frame1, text=winstatus,font=("Times New Roman", 50), bg="orange") 
+            status_label =Label(frame1, text=(status_list[0]+ winner_no + status_list[2]),font=("Times New Roman", 48), bg="orange") 
             status_label.grid(row=0,column=0,columnspan= 5)
             demoboard()
     else:
         if symble == "X":
             winner_no= "computer"
         else:
-            winner_no= "you"
+            winner_no= "You have"
             
         compstatus= ("it's your move")
-        drawstatus="the match has been drawn"
+        drawstatus="the match has been draw"
         winstatus =(winner_no+" won the match!")
         
         if win_check() == False:
             if move_no < 9:
-                status_label =Label(frame1, text=compstatus,font=("Times New Roman", 20), bg="orange") 
+                status_label =Label(frame1, text=status_list[4],font=("Times New Roman", 22), bg="orange") 
                 status_label.grid(row=0,column=0,columnspan= 5)
             else:
                 for widgets in frame.winfo_children():
                     widgets.destroy()
                 
-                status_label =Label(frame1, text=drawstatus,font=("Times New Roman", 20), bg="orange") 
+                status_label =Label(frame1, text=status_list[3],font=("Times New Roman", 27), bg="orange") 
                 status_label.grid(row=0,column=0,columnspan= 5)
                 demoboard()
         else:
             for widgets in frame.winfo_children():
                 widgets.destroy()
              
-            status_label =Label(frame1, text=winstatus,font=("Times New Roman", 30), bg="orange") 
-            status_label.grid(row=9,column=0,columnspan= 5)
+            status_label =Label(frame1, text=winner_no+status_list[5],font=("Times New Roman", 28), bg="orange") 
+            status_label.grid(row=0,column=0,columnspan= 5)
             demoboard()  
 def board():
     for widgets in frame.winfo_children():
