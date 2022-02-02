@@ -38,6 +38,7 @@ def pressed(value):
     if type != 0  and move_no < 9:
         if win_check() == False:
             compmove()
+            move_no += 1
         
     board()
         
@@ -50,8 +51,79 @@ def compmove():
         
         print(choice+1)   
         numbers[choice] = symble
-        move_no += 1
+        
         symble = "X"
+        
+    else :
+        
+        choice = 4
+
+        if numbers[4].isdigit() is True : 
+            choice == 4
+        elif  numbers[0].isdigit() is True or numbers[2].isdigit() is True or numbers[6].isdigit() is True or numbers[8].isdigit() is True:
+            while numbers[choice].isdigit() is False:
+                choice = random.choice([0,2,6,8])
+        elif numbers[1].isdigit() is True or numbers[3].isdigit() is True or numbers[5].isdigit() is True or numbers[7].isdigit() is True:
+            while numbers[choice].isdigit() is False:
+                choice = random.choice([1,3,5,7])
+        
+        if type == 3:
+
+                if numbers[0]==numbers[1] and numbers[2].isdigit() is True:
+                    choice == numbers[2]
+                elif numbers[2]==numbers[1]and numbers[0].isdigit() is True:
+                    choice == numbers[0]
+                elif numbers[0]==numbers[2]and numbers[1].isdigit() is True:
+                    choice == numbers[1]
+                elif numbers[3]==numbers[4]and numbers[5].isdigit() is True:
+                    choice == numbers[5]
+                elif numbers[4]==numbers[5]and numbers[3].isdigit() is True:
+                    choice == numbers[3]
+                elif numbers[3]==numbers[5]and numbers[4].isdigit() is True:
+                    choice == numbers[4]
+                elif numbers[6]==numbers[7]and numbers[8].isdigit() is True:
+                    choice == numbers[8] 
+                elif numbers[7]==numbers[8] and numbers[6].isdigit() is True:
+                    choice == numbers[6]
+                elif numbers[6]==numbers[8]and numbers[7].isdigit() is True:
+                    choice == numbers[7]
+                elif numbers[0]==numbers[4]and numbers[8].isdigit() is True:
+                    choice == numbers[8]
+                elif numbers[4]==numbers[8]and numbers[0].isdigit() is True:
+                    choice == numbers[0]
+                elif numbers[2]==numbers[4]and numbers[6].isdigit() is True:
+                    choice == numbers[6]
+                elif numbers[4]==numbers[6]and numbers[2].isdigit() is True:
+                    choice == numbers[2]
+                elif numbers[6]==numbers[2]and numbers[4].isdigit() is True:
+                    choice == numbers[4]    
+                elif numbers[0]==numbers[1] and numbers[6].isdigit() is True:
+                    choice == numbers[6]
+                elif numbers[3]==numbers[6]and numbers[0].isdigit() is True:
+                    choice == numbers[0]
+                elif numbers[0]==numbers[6]and numbers[3].isdigit() is True:
+                    choice == numbers[3]
+                elif numbers[1]==numbers[4]and numbers[7].isdigit() is True:
+                    choice == numbers[7]
+                elif numbers[4]==numbers[7]and numbers[1].isdigit() is True:
+                    choice == numbers[1]
+                elif numbers[1]==numbers[7]and numbers[4].isdigit() is True:
+                    choice == numbers[4]
+                elif numbers[2]==numbers[5]and numbers[8].isdigit() is True:
+                    choice == numbers[8] 
+                elif numbers[5]==numbers[8] and numbers[2].isdigit() is True:
+                    choice == numbers[2]
+                elif numbers[2]==numbers[8]and numbers[5].isdigit() is True:
+                    choice == numbers[5]
+        
+    
+        numbers[choice] = symble
+        symble = "X"
+
+
+        
+        
+        
         
 
             
@@ -236,6 +308,7 @@ def computer(lavel):
         type = 3
     else:
         type = 0
+
     
     for widgets in frame.winfo_children():
         widgets.destroy()
